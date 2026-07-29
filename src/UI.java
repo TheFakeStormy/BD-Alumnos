@@ -54,6 +54,28 @@ public class UI {
                     Alumno.MostrarAlumnos(con);
                     break;
                 case 3:
+                    System.out.println("Modificar alumno por matricula");
+                    System.out.println("Ingresar la matricula del alumno a modificar");
+                    String matMod = teclado.nextLine();
+
+                    System.out.println("Ingresar los nuevos datos");
+                    System.out.println("Ingresar el nuevo Nombre");
+                    String NuevoNombre = teclado.nextLine();
+                    System.out.println("Ingresar la nueva edad");
+                    int NuevoEdad = teclado.nextInt();
+                    teclado.nextLine();
+                    System.out.println("Ingresar Sexo");
+                    System.out.println("[1] Masculino");
+                    System.out.println("[2] Femenino");
+                    int opcNSexo = teclado.nextInt();
+                    teclado.nextLine();
+
+                    String NuevoSexo = (opcNSexo == 1)? "Masculino" : "Femenino";
+
+                    System.out.println("Ingresar nuevo correo");
+                    String NuevoCorreo = teclado.nextLine();
+
+                    Alumno.ModificarAlumno(con, matMod, NuevoNombre, NuevoEdad, NuevoSexo, NuevoCorreo);
                     break;
                 case 4:
                     break;
