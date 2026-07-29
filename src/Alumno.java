@@ -21,7 +21,8 @@ public class Alumno {
     }
 
     public void add (Connection con) throws SQLException{
-        String sql = "IF NOT EXISTS (SELECT 1 FROM [Tabla 1] WHERE matricula = ?) " +
+        String sql =
+                "IF NOT EXISTS (SELECT 1 FROM [Tabla 1] WHERE matricula = ?) " +
                 "BEGIN " +
                 "INSERT INTO [Tabla 1] (matricula, nombre, edad, sexo, correo) " +
                 "VALUES (?, ?, ?, ?, ?) " +
@@ -30,14 +31,13 @@ public class Alumno {
 
         statement.setString(1, this.matricula);
 
-        // 2. Asignar los parámetros para el INSERT
         statement.setString(2, this.matricula);
         statement.setString(3, this.nombre);
         statement.setInt(4, this.edad);
         statement.setString(5, this.sexo);
         statement.setString(6, this.correo);
-
         int queryExecStatus = statement.executeUpdate();
+
         if(queryExecStatus > 0){
             System.out.println("Alumno Creado Correctamente");
         }

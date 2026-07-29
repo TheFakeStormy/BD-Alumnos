@@ -1,0 +1,71 @@
+import java.util.Scanner;
+import java.sql.Connection;
+
+public class UI {
+    public static void Menu(Connection con){
+        Scanner teclado = new Scanner (System.in);
+        boolean menu = true;
+        int opc = 0;
+        int sx = 0;
+        do{
+            System.out.println("Menu de Opciones");
+            System.out.println("[1] Agregar Alumno");
+            System.out.println("[2] Mostrar Alumnos Registrados");
+            System.out.println("[3] Modificar Alumno por Matricula");
+            System.out.println("[4] Eliminar Alumno por Matricula");
+            System.out.println("[5] Cuantos hombres y cuantas mujeres hay");
+            System.out.println("[6] Salir");
+            opc = teclado.nextInt();
+            switch(opc){
+                case 1:System.out.println("--- INGRESAR DATOS DEL ALUMNO ---");
+
+                    System.out.print("Matricula: ");
+                    String matricula = teclado.nextLine();
+
+                    System.out.print("Nombre: ");
+                    String nombre = teclado.nextLine();
+
+                    System.out.print("Edad: ");
+                    int edad = teclado.nextInt();
+                    teclado.nextLine();
+                    String sexo = "null";
+
+                    System.out.print("Sexo (masculino/femenino): ");
+                    System.out.println("[1] Masculino");
+                    System.out.println("[2] Femenino");
+                    sx = teclado.nextInt();
+                    switch(sx){
+                        case 1: sexo= "Masculino";
+                            break;
+                        case 2: sexo = "Femenino";
+                            break;
+                        default:
+                            break;
+                    }
+                    System.out.print("Correo: ");
+                    String correo = teclado.nextLine();
+
+                    try {
+                        Alumno nuevoAlumno = new Alumno(matricula, nombre, edad, sexo, correo, con);
+                        nuevoAlumno.add(con);
+                    } catch (Exception e) {
+                        System.out.println("Error al registrar el alumno: " + e.getMessage());
+                    }
+
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                default:
+                    break;
+            }
+        }while(menu == true);
+    }
+}
