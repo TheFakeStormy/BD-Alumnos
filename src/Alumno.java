@@ -1,7 +1,4 @@
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.ResultSet;
+import java.sql.*;
 
 public class Alumno {
     private int id;
@@ -63,7 +60,7 @@ public class Alumno {
                 String sexo = rs.getString("sexo");
                 String correo = rs.getString("correo");
 
-                System.out.printf(id+" | "+matricula+" | "+nombre+" | "+edad +" | "+sexo +" | "+correo);
+                System.out.println(id+" | "+matricula+" | "+nombre+" | "+edad +" | "+sexo +" | "+correo);
             }
 
             if(!HayAlumnos){
@@ -75,5 +72,26 @@ public class Alumno {
 
             System.out.println("Error al consultar la base de datos "+e.getMessage());
         }
+    }
+
+    public static void ModificarAlumno(Connection con, String matricula, String NuevoNombre, int NuevoEdad, String NuevoSexo, String NuevoCorreo){
+    String sql = "UPDATE [Tabla 1] SET nombre = ?, edad = ?, sexo = ?, correo = ? WHERE matricula = ?";
+    try(PreparedStatement statement = con.prepareStatement(sql)){
+        statement.setString(1, NuevoNombre);
+        statement.setInt(2, NuevoEdad);
+        statement.setString(3, NuevoSexo);
+        statement.setString(4, NuevoCorreo);
+        statement.setString(5, matricula);
+
+        int filasAfectadas = statement.executeUpdate();
+        if(filasAfectadas > 0){
+            System.out.println("Cambios realizados con exito");
+        }
+        else {
+            System.out.println("Algo salio mal");
+        }
+    }catch(SQLException e){
+
+    }
     }
 }
