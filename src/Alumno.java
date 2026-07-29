@@ -1,6 +1,7 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.ResultSet;
 
 public class Alumno {
     private int id;
@@ -43,6 +44,36 @@ public class Alumno {
         }
         else{
             System.out.println("No se cargo ningun dato");
+        }
+    }
+
+    public static void MostrarAlumnos(Connection con){
+        String sql = "SELECT id, matricula, nombre, edad, sexo, correo FROM [Tabla 1]";
+
+        try (PreparedStatement statement = con.prepareStatement(sql);
+        ResultSet rs = statement.executeQuery()){
+            System.out.println("ID | MATRICULA | NOMBRE | EDAD | SEXO | CORREO");
+            boolean HayAlumnos = false;
+            while (rs.next()){
+                HayAlumnos = true;
+                int id = rs.getInt("id");
+                String matricula = rs.getString("matricula");
+                String nombre = rs.getString("nombre");
+                int edad = rs.getInt("edad");
+                String sexo = rs.getString("sexo");
+                String correo = rs.getString("correo");
+
+                System.out.printf(id+" | "+matricula+" | "+nombre+" | "+edad +" | "+sexo +" | "+correo);
+            }
+
+            if(!HayAlumnos){
+                System.out.println("No hay alumnos en la base de datos");
+            }
+
+        }
+        catch (SQLException e){
+
+            System.out.println("Error al consultar la base de datos "+e.getMessage());
         }
     }
 }

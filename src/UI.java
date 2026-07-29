@@ -16,8 +16,10 @@ public class UI {
             System.out.println("[5] Cuantos hombres y cuantas mujeres hay");
             System.out.println("[6] Salir");
             opc = teclado.nextInt();
+            teclado.nextLine();
             switch(opc){
-                case 1:System.out.println("--- INGRESAR DATOS DEL ALUMNO ---");
+                case 1:
+                    System.out.println("--- INGRESAR DATOS DEL ALUMNO ---");
 
                     System.out.print("Matricula: ");
                     String matricula = teclado.nextLine();
@@ -28,20 +30,15 @@ public class UI {
                     System.out.print("Edad: ");
                     int edad = teclado.nextInt();
                     teclado.nextLine();
-                    String sexo = "null";
 
                     System.out.print("Sexo (masculino/femenino): ");
                     System.out.println("[1] Masculino");
                     System.out.println("[2] Femenino");
-                    sx = teclado.nextInt();
-                    switch(sx){
-                        case 1: sexo= "Masculino";
-                            break;
-                        case 2: sexo = "Femenino";
-                            break;
-                        default:
-                            break;
-                    }
+                    int opcSexo = teclado.nextInt();
+                    teclado.nextLine();
+
+                    String sexo = (opcSexo == 1)? "masculino" : "femenino";
+
                     System.out.print("Correo: ");
                     String correo = teclado.nextLine();
 
@@ -54,6 +51,7 @@ public class UI {
 
                     break;
                 case 2:
+                    Alumno.MostrarAlumnos(con);
                     break;
                 case 3:
                     break;
