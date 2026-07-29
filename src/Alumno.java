@@ -21,20 +21,21 @@ public class Alumno {
     }
 
     public void add (Connection con) throws SQLException{
-        PreparedStatement statement = con.prepareStatement(
-                "IF NOT EXISTS (SELECT 1 FROM Alumno WHERE matricula = '001') " +
-                        "BEGIN " +
-                        "INSERT INTO Alumno (matricula, nombre, edad, sexo, correo) " +
-                        "VALUES ('001', 'Pedro', 19, 'masculino', 'mail.com') " +
-                        "END"
-        );
-        statement.executeUpdate();
+        String sql = "IF NOT EXISTS (SELECT 1 FROM [Tabla 1] WHERE matricula = ?) " +
+                "BEGIN " +
+                "INSERT INTO [Tabla 1] (matricula, nombre, edad, sexo, correo) " +
+                "VALUES (?, ?, ?, ?, ?) " +
+                "END";
+        PreparedStatement statement = con.prepareStatement(sql);
 
         statement.setString(1, this.matricula);
-        statement.setString(2, this.nombre);
-        statement.setInt(3, this.edad);
-        statement.setString(4,this.sexo);
-        statement.setString(5, this.correo);
+
+        // 2. Asignar los parámetros para el INSERT
+        statement.setString(2, this.matricula);
+        statement.setString(3, this.nombre);
+        statement.setInt(4, this.edad);
+        statement.setString(5, this.sexo);
+        statement.setString(6, this.correo);
 
         int queryExecStatus = statement.executeUpdate();
         if(queryExecStatus > 0){
