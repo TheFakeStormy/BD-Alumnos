@@ -85,7 +85,7 @@ public class Alumno {
 
         int filasAfectadas = statement.executeUpdate();
         if(filasAfectadas > 0){
-            System.out.println("Cambios realizados con exito");
+            System.out.println("Cambios realizados con exito en la matricula "+matricula);
         }
         else {
             System.out.println("Algo salio mal");
