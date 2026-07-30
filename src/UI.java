@@ -37,7 +37,7 @@ public class UI {
                     int opcSexo = teclado.nextInt();
                     teclado.nextLine();
 
-                    String sexo = (opcSexo == 1)? "masculino" : "femenino";
+                    String sexo = (opcSexo == 1)? "Masculino" : "Femenino";
 
                     System.out.print("Correo: ");
                     String correo = teclado.nextLine();
@@ -78,10 +78,22 @@ public class UI {
                     Alumno.ModificarAlumno(con, matMod, NuevoNombre, NuevoEdad, NuevoSexo, NuevoCorreo);
                     break;
                 case 4:
+                    System.out.println("Ingresar matricula del alumno a eliminar");
+                    String matEliminar = teclado.nextLine();
+                    System.out.println("Esta seguro que quiere eliminar "+matEliminar+"?");
+                    System.out.println("[s/n]");
+                    String confirmar = teclado.nextLine();
+                    if (confirmar == "s"){
+                        Alumno.EliminarAlumno(con, matEliminar);
+                    }else{
+                        System.out.println("operacion cancelada");
+                    }
                     break;
                 case 5:
+                    Alumno.Conteo(con);
                     break;
                 case 6:
+                    menu = false;
                     break;
                 default:
                     break;

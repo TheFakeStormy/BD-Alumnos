@@ -94,4 +94,41 @@ public class Alumno {
 
     }
     }
+
+    public static void EliminarAlumno(Connection con, String matricula){
+        String sql = "DELETE FROM [Tabla 1] WHERE matricula = ?";
+        try (PreparedStatement statement = con.prepareStatement(sql)){
+            statement.setString(1, matricula);
+
+            int FilasAfectadas = statement.executeUpdate();
+
+            if (FilasAfectadas > 0){
+                System.out.println("Se ejecuto al alumno "+matricula+" exitosamente");
+            }else{
+                System.out.println("Algo salio mal");
+            }
+        }catch (SQLException e){
+
+        }
+    }
+
+    public static void Conteo(Connection con){
+        String sql = "SELECT"+
+                "SUM (CASE WHEN LOWER (sexo) = 'Masculino' THEN 1 ELSE 0) END"+
+                "SUM (CASE WHEN LOWER (sexo) = 'Femenino' THEN 1 ELSE 0) END";
+        try(PreparedStatement statement = con.prepareStatement(sql)){
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()){
+                int THombres = rs.getInt("Hombres");
+                int TMujeres = rs.getInt("Mujeres");
+                int Total = TMujeres + THombres;
+
+                System.out.println("Hay "+THombres+" Hombres registrados");
+                System.out.println("Hay "+TMujeres+" Mujeres registradas");
+                System.out.println("Hay "+Total+" Alumnos registrados");
+            }
+        }catch(SQLException e){
+            System.out.println("Error al ejecutar el conteo "+e.getMessage());
+        }
+    }
 }
