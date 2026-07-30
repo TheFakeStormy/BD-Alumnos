@@ -113,9 +113,11 @@ public class Alumno {
     }
 
     public static void Conteo(Connection con){
-        String sql = "SELECT"+
-                "SUM (CASE WHEN LOWER (sexo) = 'Masculino' THEN 1 ELSE 0) END"+
-                "SUM (CASE WHEN LOWER (sexo) = 'Femenino' THEN 1 ELSE 0) END";
+        String sql =
+                "SELECT"+
+                " SUM(CASE WHEN LOWER(sexo) = 'Masculino' THEN 1 ELSE 0 END) AS Hombres, "+
+                " SUM(CASE WHEN LOWER(sexo) = 'Femenino' THEN 1 ELSE 0 END) AS Mujeres "+
+                "FROM [Tabla 1]";
         try(PreparedStatement statement = con.prepareStatement(sql)){
             ResultSet rs = statement.executeQuery();
             if(rs.next()){
